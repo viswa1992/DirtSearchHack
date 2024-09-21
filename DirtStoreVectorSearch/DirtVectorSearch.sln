@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendAPI", "BackendAPI\BackendAPI.csproj", "{2A81A6BA-9749-466C-9FBF-E7F5BA826231}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorSearch", "VectorSearch\VectorSearch.csproj", "{E571F89F-0EAD-4CFE-AF3D-5DC5BCC38669}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A81A6BA-9749-466C-9FBF-E7F5BA826231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A81A6BA-9749-466C-9FBF-E7F5BA826231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A81A6BA-9749-466C-9FBF-E7F5BA826231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A81A6BA-9749-466C-9FBF-E7F5BA826231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E571F89F-0EAD-4CFE-AF3D-5DC5BCC38669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E571F89F-0EAD-4CFE-AF3D-5DC5BCC38669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E571F89F-0EAD-4CFE-AF3D-5DC5BCC38669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E571F89F-0EAD-4CFE-AF3D-5DC5BCC38669}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {389F58FE-0BDD-43FB-9C8A-FAFFC4EE5648}
+	EndGlobalSection
+EndGlobal
