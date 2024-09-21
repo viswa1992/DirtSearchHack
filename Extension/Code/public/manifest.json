@@ -1,0 +1,41 @@
+{
+    "name": "factchecker plugin",
+    "version": "1.0.0",
+    "description": "Factchecker plugin",
+    "permissions": ["storage", "tabs", "history","webNavigation","contextMenus"],
+    "host_permissions": ["*://*/*"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "icons":{
+      "16": "documents16.png",
+      "64": "documents64.png",
+      "128": "documents128.png"
+    },
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/bookmark.png",
+          "assets/play.png",
+          "assets/delete.png",
+          "assets/save.png"
+        ],
+        "matches": ["<all_urls>"]
+      }
+    ],
+    "action": {
+      "default_icon": {
+        "16": "documents16.png",
+        "64": "documents64.png",
+        "128": "documents128.png"
+      },
+      "default_popup": "index.html"
+    },
+    "manifest_version": 3
+}
