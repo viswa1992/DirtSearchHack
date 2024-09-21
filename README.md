@@ -4,7 +4,8 @@ In this hack we have leveraged this repository as well as Bing search data to bu
 
 ## Try it out: Edge plugin
 To demonstrate the power of this platform we have built a plugin for edge browser:
-1. Download the edge plugin zip from here: https://github.com/viswa1992/DirtSearchHack/blob/main/Extension/Download/DirtRealityCheckProd.zip
+1. Download the edge plugin zip from here: https://github.com/viswa1992/DirtSearchHack/blob/main/Extension/Download/DirtRealityCheckProd.zip </br> <img src="https://github.com/user-attachments/assets/833cf1ec-b0ce-41d6-9530-4deb3e381f35" alt="ExtensionSettings" width="400"/>
+
 1. Open your edge browser and go to the extension settings: </br> <img src="https://github.com/user-attachments/assets/abd374cb-de06-482d-8aaf-24a89ee17b6e" alt="ExtensionSettings" width="400"/>
 1. Enable developer mode: </br> <img src="https://github.com/user-attachments/assets/4ad1dad6-6596-4411-b3bd-7b7b0f6677e1" alt="ExtensionSettings" width="400"/>
 1. Drag and drop the downloaded zip file anywhere into this window (no need to extract): </br> <img src="https://github.com/user-attachments/assets/e300b872-03f0-4e0f-9c6f-a6ace2cf9b98" alt="ExtensionSettings" width="400"/>
