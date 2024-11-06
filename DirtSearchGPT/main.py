@@ -16,6 +16,7 @@ import regex
 import threading  # Added for thread safety
 import hashlib    # Added for hashing
 from collections import OrderedDict  # For implementing LRU cache (optional)
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ----------------------------
 # Configuration and Setup
@@ -31,6 +32,12 @@ app = FastAPI(
 
 #start the app
 #uvicorn main:app --host 0.0.0.0 --port 8000
+
+# deploying the app
+# zip main.py and requirements.txt into DirtSearchGPT.zip
+# Use azure powershell
+# az login
+# az webapp deployment source config-zip --resource-group Hack2024Personal --name DirtSearchGPT --src .\DirtSearchGPT.zip
 
 logging.basicConfig(
     level=logging.INFO,
@@ -447,16 +454,16 @@ def execute_dirtsearch_queries(queries: list) -> list:
 
 def execute_bing_search_queries(queries: list) -> dict:
     """
-    Executes all search queries using Bing Search API.
+    Executes all search queries using Bing Search API in parallel.
 
     :param queries: A list of search query strings.
     :return: A dictionary mapping each query to its Bing search results.
     """
-    logger.info("Executing all search queries using Bing Search API.")
+    logger.info("Executing all search queries using Bing Search API in parallel.")
     search_results = {}
     headers = {"Ocp-Apim-Subscription-Key": BING_API_KEY}
 
-    for query in queries:
+    def fetch_query(query):
         logger.info(f"Searching for query: {query}")
         params = {
             "q": query,
@@ -474,11 +481,9 @@ def execute_bing_search_queries(queries: list) -> dict:
             
             data = response.json()
             web_pages = data.get("webPages", {}).get("value", [])
-            search_results[query] = web_pages
             logger.debug(f"Bing Search Results for '{query}': {web_pages}")
+            return query, web_pages
             
-            time.sleep(1)  # To respect API rate limits
-
         except requests.exceptions.RequestException as e:
             logger.error(f"RequestException while contacting Bing Search API for query '{query}': {e}")
             raise HTTPException(status_code=500, detail=f"RequestException while contacting Bing Search API for query '{query}': {e}")
@@ -488,6 +493,12 @@ def execute_bing_search_queries(queries: list) -> dict:
         except Exception as e:
             logger.error(f"Generic error while executing Bing Search for query '{query}': {e}")
             raise HTTPException(status_code=500, detail=f"Generic error while executing Bing Search for query '{query}': {e}")
+
+    with ThreadPoolExecutor(max_workers=6) as executor:
+        future_to_query = {executor.submit(fetch_query, query): query for query in queries}
+        for future in as_completed(future_to_query):
+            query, result = future.result()
+            search_results[query] = result
 
     return search_results
 
@@ -576,6 +587,7 @@ def dirtsearch(input: str):
     cached_response = get_from_cache(cache_key)
     if cached_response:
         logger.info("Cache hit for input text.")
+        time.sleep(4)
         return cached_response
 
     logger.info("Cache miss. Processing the input text.")
@@ -648,7 +660,7 @@ def clean_text(text):
     if not text:
         return ""
     
-    cleaned_text = regex.sub(r'[^\p{L}\p{N} ]+', '', text)
+    cleaned_text = regex.sub(r'[^\p{L}\p{N}\-:. ]+', '', text)
     
     return cleaned_text
 
